@@ -185,3 +185,112 @@
 // console.log(a);
 
 
+// const NUMBERS_MAP = {0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9};
+// const NEG_NUMBERS_MAP = {0: -0, 1: -1, 2: -2, 3: -3, 4: -4, 5: -5, 6: -6, 7: -7, 8: -8, 9: -9};
+
+// function stringToInteger(string) {
+//   const numbers = stringToNumber(string);
+
+//   return numbers.reduce((acc, number) => {
+//     return 10 * acc + number;
+//   }, 0);
+
+// }
+
+// function stringToSignedInteger(string) {
+//   switch (string[0]) {
+//     case '-': return -stringToInteger(string.slice(1));
+//     case '+': return stringToInteger(string.slice(1));
+//     default: return stringToInteger(string);
+//   }
+// }
+
+// function getNumberMap(string) {
+//   if (string.startsWith('-')) {
+//     return NEG_NUMBERS_MAP;
+//   } else {
+//     return POS_NUMBERS_MAP;
+//   }
+// }
+
+// function processSign(string) {
+//   if (string.startsWith('-') || string.startsWith('+')) {
+//     return string.substring(1);
+//   } else {
+//     return string;
+//   }
+// }
+
+// function stringToNumber(string) {
+//   const numbers = [];
+  
+//   for (let index = 0; index < string.length; index += 1) {
+//     numbers.push(NUMBERS_MAP[string[index]]);
+//   }
+
+//   return numbers;
+// }
+
+// console.log(stringToSignedInteger('-4321'));
+// console.log(stringToSignedInteger('-4321'));
+// console.log(stringToSignedInteger('4321'));
+// console.log(stringToSignedInteger('570'));
+
+
+
+// function integerToString(integer) {
+//   if (integer === 0) {
+//     return '0';
+//   }
+
+//   let placeValues = integer;
+//   let chars = [];
+//   while (placeValues > 0) {
+//     chars.push(placeValues % 10);
+//     placeValues = Math.floor(placeValues / 10);
+//   }
+
+//   let string = '';
+//   chars.reverse().forEach(char => {
+//     string += NUMBERS_CHAR_MAP[char];
+//   })
+
+//   return string;
+// }
+
+const NUMBERS_CHAR_MAP = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+function integerToString(integer) {
+ let string = '';
+ do {
+  let remainder = integer % 10;
+  integer = Math.floor(integer / 10);
+
+  string = NUMBERS_CHAR_MAP[remainder] + string;
+ } while (integer > 0);
+
+  return string;
+}
+
+function signedIntegerToString(integer) {
+  if (integer > 0) {
+    return '+' + integerToString(integer);
+  } else if (integer < 0) {
+    return '-' + integerToString(-integer);
+    // negative 0 case
+  } else if (1 / integer === -Infinity) {
+    return '-' + integerToString(integer);
+  } else {
+    return integerToString(integer);
+  }
+}
+
+// console.log(integerToString(4321));      // "4321"
+// console.log(integerToString(0));       // "0"
+// console.log(integerToString(123));      // "4321"
+// console.log(integerToString(5000));    // "5000"
+
+console.log(signedIntegerToString(4321));      // "+4321"
+console.log(signedIntegerToString(-123));      // "-123"
+console.log(signedIntegerToString(0));
+console.log(signedIntegerToString(-0));
