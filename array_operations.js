@@ -225,5 +225,179 @@ function endsOf(beginningArr, endingArr) {
   return [beginningArr[0], endingArr[endingArr.length - 1]];
 }
 
-console.log(endsOf([4, 8, 15], [16, 23, 42]));  // returns [4, 42]
+// console.log(endsOf([4, 8, 15], [16, 23, 42]));  // returns [4, 42]
 
+function oddElementsOf(arr) {
+  let newArr = [];
+  for (let index = 1; index < arr.length; index += 2) {
+    newArr.push(arr[index]);
+  }
+
+  return newArr;
+}
+
+// let digits = [4, 8, 15, 16, 23, 42];
+
+// console.log(oddElementsOf(digits));    // returns [8, 16, 42]
+
+
+// function mirroredArray(arr) {
+//   let newArr = [];
+//   let length = arr.length;
+
+//   for (let index = 0; index < length; index += 1) {
+//     newArr.push(arr[index]);
+//   }
+
+//   for (let index = length - 1; index >= 0; index -= 1) {
+//     newArr.push(arr[index]);
+//   }
+
+//   return newArr;
+// }
+
+function mirroredArray(arr) {
+  let arrCopy = arr.slice();
+  return arr.concat(arrCopy.reverse());
+}
+
+// let digits = [4, 8, 15, 16, 23, 42];
+// console.log(mirroredArray(digits));
+// console.log(digits);
+
+function sortDescending(arr) {
+  return arr.slice().sort((a, b) => {
+    return b - a;
+  });
+}
+
+// Sort Descending for strings
+// function sortDescending(arr) {
+//   return arr.slice().sort((a,b) => {
+//     if (a > b) {
+//       return -1;
+//     } else if (a < b) {
+//       return 1;
+//     } else {
+//       return 0;
+//     }
+//   });
+// }
+
+// let array = [23, 4, 16, 42, 8, 15];
+// let array2 = ['a', 'b', 'c', 'd'];
+// let array3 = ['abc', 'bef', 'chig', 'deie'];
+// let result = sortDescending(array);
+// let result2 = sortDescending(array2);
+// let result3 = sortDescending(array3);
+// console.log(result);                 // logs    [42, 23, 16, 15, 8, 4]
+// console.log(result2);                 // logs    [42, 23, 16, 15, 8, 4]
+// console.log(result3);                 // logs    [42, 23, 16, 15, 8, 4]
+// console.log(array);                  // logs    [23, 4, 16, 42, 8, 15]
+
+function matrixSums(arr) {
+  return arr.reduce((acc, arr) => {
+    acc.push(arr.reduce((acc, num) => {
+      return acc + num;
+    }, 0));
+    
+    return acc;
+  }, []);
+}
+
+// console.log(matrixSums([[2, 8, 5], [12, 48, 0], [12]]));  // returns [15, 60, 12]
+
+// function uniqueElements(arr) {
+//   let newArr = [];
+
+//   for (let index = 0; index < arr.length; index += 1) {
+//     if (!inArray(newArr, arr[index ])) {
+//       newArr.push(arr[index ]);
+//     }
+//   }
+
+//   return newArr;
+// }
+
+// function inArray(arr, value) {
+//   for (let index = 0; index < arr.length; index += 1) {
+//     if (value === arr[index]) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+
+function uniqueElements(arr) {
+  let newArr = [];
+
+  for (let index = 0; index < arr.length; index += 1) {
+    if (!newArr.includes(arr[index])) {
+      newArr.push(arr[index ]);
+    }
+  }
+
+  return newArr;
+}
+
+// console.log(uniqueElements([1, 2, 4, 3, 4, 1, 5, 4]));  // returns [1, 2, 4, 3, 5]
+
+/*
+loop over array
+  if current element + 1 equals next element
+    continue
+  else
+    loop the amount of times that is the difference of current element with next elemetn
+      start at the value of current element plus 1
+      append to the array
+    stop if next increment == next element
+
+
+
+*/
+
+
+function missing(arr) {
+  let missingIntegers = [];
+
+  for (let index = 0; index < arr.length - 1; index += 1) {
+    let currElement = arr[index];
+    let nextElement = arr[index + 1];
+
+    if (currElement + 1 === nextElement) {
+      continue
+    } else {
+      let amountMissing = Math.abs(nextElement - currElement) - 1;
+
+      for (let nextMissing = 1; nextMissing <= amountMissing;  nextMissing += 1) {
+        missingIntegers.push(currElement + nextMissing);
+      }
+    }
+  }
+
+  return missingIntegers;
+}
+
+
+
+// console.log(missing([-3, -2, 1, 5]));                  // [-1, 0, 2, 3, 4]
+// console.log(missing([1, 2, 3, 4]));                    // []
+// console.log(missing([1, 5]));                          // [2, 3, 4]
+// console.log(missing([6]));                             // []
+
+function foo(qux, bar) {
+  let result = [];
+  let len = qux.length;
+
+  for (let index = 0; index < len; index += 1) {
+    result.push(qux[index]);
+    result.push(bar[index]);
+  }
+
+  return result;
+}
+
+let array1 = [4, 8, 15, 16, 23, 42];
+let array2 = ['A', 'L', 'V', 'A', 'R', 'H'];
+
+console.log(foo(array1, array2));  // returns [4, "A", 8, "L", 15, "V", 16, "A", 23, "R", 42, "H"]
