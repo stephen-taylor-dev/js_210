@@ -73,4 +73,79 @@ function wordCount(words) {
   return object;
 }
 
-console.log(wordCount('box car cat bag box'));  // { box: 2, car: 1, cat: 1, bag: 1 }
+// console.log(wordCount('box car cat bag box'));  // { box: 2, car: 1, cat: 1, bag: 1 }
+
+
+function greetings(...args) {
+  let name = args[0].join(" ");
+  let jobTitle = Object.values(args[1]).join(" ");
+  console.log(`Hello, ${name}! Nice to have a ${jobTitle} around.`)
+}
+
+greetings(['John', 'Q', 'Doe'], { title: 'Master', occupation: 'Plumber' });
+
+// console output
+//Hello, John Q Doe! Nice to have a Master Plumber around.
+
+
+/*
+
+input string
+output object with counts of each repeated character
+
+ignores case
+only returns characters that have 2 or more chars
+
+string
+object
+
+loop over each character in the string
+convert to lowercase
+use current letter to add to object as key
+increment the key by 1 
+
+intialize output hash
+loop over hash afer getting counts
+add the key value pair to the new hash if the value is greater than 2
+return output
+
+*/
+
+function repeatedCharacters(string) {
+  string = string.toLowerCase();
+  let chars = {};
+
+  for (let index = 0; index < string.length; index += 1) {
+    let char = string[index];
+    
+    if (chars[char]) {
+      chars[char] += 1;
+    } else {
+      chars[char] = 1;
+    }
+  }
+
+  for (let char in chars) {
+    if (chars[char] < 2) {
+      delete chars[char];
+    }
+  }
+
+  return chars;
+}
+
+console.log(repeatedCharacters('Programming'));    // { r: 2, g: 2, m: 2 }
+console.log(repeatedCharacters('Combination'));    // { o: 2, i: 2, n: 2 }
+console.log(repeatedCharacters('Pet'));            // {}
+console.log(repeatedCharacters('Paper'));          // { p: 2 }
+console.log(repeatedCharacters('Baseless'));       // { s: 3, e: 2 }
+
+function read(pages) {
+  console.log('You started reading.');
+  for (let page = 0; page < pages; page++) {
+    let message = 'You read page ' + page;
+    console.log(message);
+  }
+}
+
+read(400);

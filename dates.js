@@ -44,10 +44,10 @@ function dateSuffix(date) {
   if (date >= 21) {
     date = Math.floor(date % 10);
   }
-  
+
   switch (date) {
     case 1:
-    return formattedDay + "st";
+      return formattedDay + "st";
     case 2:
       return formattedDay + "nd";
     case 3:
